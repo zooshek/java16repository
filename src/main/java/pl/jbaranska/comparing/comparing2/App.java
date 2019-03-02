@@ -1,4 +1,4 @@
-package pl.jbaranska.comparing2;
+package pl.jbaranska.comparing.comparing2;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,6 +30,7 @@ public class App {
 
         Collections.sort(animalList, compareAnimal.reversed());
         System.out.println(animalList.toString());
+
 
     }
 }

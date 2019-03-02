@@ -13,6 +13,8 @@ public class Example {
         System.out.println("..");
         System.out.println(getVendorNameSuperNaiveImp(meybeComputer));
         System.out.println("..");
+        System.out.println(getVendorNameSuperNaiveImp2(meybeComputer));
+        System.out.println("..");
 
         Optional<String> maybeMyName = Optional.ofNullable(null);
         if (maybeMyName.isPresent()) {
@@ -33,13 +35,22 @@ public class Example {
 
     }
 
+    public static String getVendorNameSuperNaiveImp2(Computer computer) {
+        return    Optional.ofNullable(computer)
+                .flatMap(Computer::getGraphicsCard)
+                .flatMap(GraphicsCard::getChipset)
+                .map(Chipset::getVendorName)
+                .orElseGet(() -> "brak");
+
+    }
+/*
     public static String getVendorNameSaveImp(Computer computer) {
         return "";
     }
     //cos co nulla lub niema
     //mapa zamienia jeden obiekt w drugi zamieniam computer w byc moze graficscard jesli w srodku nic nie ma przetwarzanie jest leniwe.
     //
-    /*
+
     public static Optional<String> getVendorNameJava8WayShortWay(Computer computer) {
        return  Optional.ofNullable(computer)
                 .map(Computer::getGraphicsCard)
@@ -48,6 +59,7 @@ public class Example {
              //   .orElseGet(()-> "Unknown");
       //  return Optional.empty();
     }
+    /*
     public static Optional<String> getVendorNameJava8Way(Computer computer) {
         return  Optional.ofNullable(computer)
                 .map(computer1 -> computer1.getGraphicsCard())

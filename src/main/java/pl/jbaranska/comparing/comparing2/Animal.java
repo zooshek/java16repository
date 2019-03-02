@@ -1,4 +1,4 @@
-package pl.jbaranska.comparing2;
+package pl.jbaranska.comparing.comparing2;
 
 public class Animal implements Comparable<Animal>{
     private String type ;
