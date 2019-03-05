@@ -59,7 +59,7 @@ public class Example {
              //   .orElseGet(()-> "Unknown");
       //  return Optional.empty();
     }
-    /*
+
     public static Optional<String> getVendorNameJava8Way(Computer computer) {
         return  Optional.ofNullable(computer)
                 .map(computer1 -> computer1.getGraphicsCard())

@@ -23,7 +23,7 @@ public class StreamExample {
                 ));
         Order saturdayShopping = new Order(saturdayItems);
 
-        System.out.print(getIngredientsNames(Arrays.asList(saturdayShopping)));
+      //  System.out.print(getIngredientsNames2(Arrays.asList(saturdayShopping)));
 
         List<Item> sundayItems = Arrays.asList(
                 new Item("cola", BigDecimal.valueOf(4.50),
@@ -33,9 +33,10 @@ public class StreamExample {
 
                 ));
         Order sundayShopping = new Order(sundayItems);
-        System.out.print(getIngredientsNames(Arrays.asList(sundayShopping)));
+       // System.out.print(getIngredientsNames(Arrays.asList(sundayShopping)));
       //  System.out.println(getTotalPrice(sundayShopping));
     }
+
     public static List<String> getIngredientsNames(List<Order> orders){
 
         return   orders.stream()
@@ -45,12 +46,43 @@ public class StreamExample {
                 .distinct()
                 .collect(Collectors.toList());
     }
+
+    public static List<String> getIngredientsNames2(List<Order> orders){
+        List<String> list = new ArrayList<>();
+
+            return
+           orders.stream()
+                .flatMap(order -> order.getMyItems().stream()) //strumien items List
+                .flatMap(item -> item.getIngrediensList().stream())
+                .map(ingredien -> ingredien.getName())
+                .distinct()
+                   //identity zbiornik do ktorego wrzucamy elementy
+
+                .reduce( list,
+                        //strumien stringow , element strumienia
+                        ( string, s )->{ string.add(s);
+                            System.out.println(string);
+                            return string;
+                        }
+                           //combinator}
+                            ,((strings, strings2) -> {
+                                strings.addAll(strings2);
+                                return strings;
+                        }));
+
+
+    //    return Collections.EMPTY_LIST;
+
+              //  .collect(Collectors.toList());
+    }
     public static BigDecimal getTotalPrice(List<Order> orders)
     {
         return
         orders.stream()
                 .flatMap(order -> order.getMyItems().stream())
                 .map(price -> price.getPrice())
+
+                //reduce(pierwszy parametr liczba poczatkowa )
                 .reduce(BigDecimal.ZERO,(a,b) -> a.add(b));
     }
 }

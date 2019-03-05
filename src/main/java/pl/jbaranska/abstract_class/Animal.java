@@ -15,4 +15,11 @@ public abstract class Animal {
     //2 metody abstakcyjne 2 lambdy
     public abstract void eat();
     public abstract void play();
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
