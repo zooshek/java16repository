@@ -17,11 +17,25 @@ public class CollectionsTest {
 
         displayAnimals(dogs);
         displayAnimals(cats);
+        displayAnimals(animals);
     }
     //super wyslac od animal w gore do obiecta a dodac wszystko w dol do psa kota
     public static void addAnimal(List<? super Animal> animals)
     {
+
         animals.add(new Cat("hhh"));
+       // animals.add(new Object("hjh"));
+        animals.add(new Animal("animal") {
+            @Override
+            public void eat() {
+
+            }
+
+            @Override
+            public void play() {
+
+            }
+        });
     }
     public static void displayAnimals(List<? extends Animal> animals)
     {
